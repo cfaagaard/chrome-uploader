@@ -29,17 +29,17 @@ install:
   - ps: Update-AppveyorBuild -Version "$env:package_version-$env:APPVEYOR_BUILD_NUMBER"
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
-  - yarn --frozen-lockfile
+  - node ./yarn-0.25.3.js --frozen-lockfile
 
 test_script:
   - node --version
-  - yarn lint
-  - yarn test
+  - node ./yarn-0.25.3.js lint
+  - node ./yarn-0.25.3.js test
 #  - yarn test-e2e
-  - yarn package-dev
+  - node ./yarn-0.25.3.js package-dev
   - 7z a development.zip release
   - rmdir /S /Q release
-  - yarn package
+  - node ./yarn-0.25.3.js package
   - 7z a production.zip release
 
 
